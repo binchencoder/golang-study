@@ -21,6 +21,10 @@ func main() {
 	// 使用内置的delete函数可以删除元素
 	delete(ages, "alice")
 
+	if age, ok := ages1[key]; ok {
+		fmt.Printf("The key[%s] in the ages1 map, value is %d\n", key, age)
+	}
+
 	// 遍历map
 	for name, age := range ages {
 		fmt.Printf("Key: %s, Value: %d\n", name, age)
