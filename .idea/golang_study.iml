@@ -6,6 +6,5 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="GOPATH" level="application" />
-    <orderEntry type="library" name="GOPATH &lt;golang_study&gt;" level="project" />
   </component>
 </module>
