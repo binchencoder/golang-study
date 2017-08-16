@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"fmt"
-	"jingoal.com/golang_study/ch4/github"
+	"chenbin.com/golang_study/ch4/github"
 	"log"
 )
 
@@ -15,6 +15,6 @@ func main() {
 	}
 	fmt.Printf("%d issues:\n", result.TotalCount)
 	for _, item := range result.Items {
-		fmt.Printf("#%-5d %9.9s %.55s\n", item.Number, item.User.Login, item.Title)
+		fmt.Printf("#%-5d %9.9s %.55s %1s\n", item.Number, item.User.Login, item.Title, item.State)
 	}
 }

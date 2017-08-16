@@ -23,7 +23,7 @@ type Issues struct {
 	State     string
 	User      *User
 	CreatedAt time.Time `json:"created_at"`
-	Body      string    // in Markdown format
+	Body      string // in Markdown format
 }
 
 type User struct {
