@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// Employee of test struct
 type Employee struct {
 	ID        int
 	Name      string
@@ -15,6 +16,7 @@ type Employee struct {
 	ManagerID int
 }
 
+// AwardAnnualRaise of test
 func AwardAnnualRaise(e *Employee) {
 	e.Salary = e.Salary * 105
 }
