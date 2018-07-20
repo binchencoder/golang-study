@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+//
 func main() {
 	doc, err := html.Parse(os.Stdin)
 	if err != nil {
