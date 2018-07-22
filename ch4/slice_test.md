@@ -5,7 +5,7 @@
 ```
 cd ch4
 
-go test -bench ch4/ -benchmem -gcflags "-N -l"
+go test -bench . -benchmem -gcflags "-N -l"
 ```
 
 These is benchmark result:
