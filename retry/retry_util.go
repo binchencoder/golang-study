@@ -12,14 +12,6 @@ func Retry(retryCnt int, sleep time.Duration, fn func() error) (err error) {
 	}
 
 	for i := 1; i <= retryCnt; i++ {
-		if err = fn(); err == nil {
-			return
-		}
-
-		if s, ok := err.(stop); ok {
-			return s.error
-		}
-
 		var printLog string
 		if i == retryCnt {
 			printLog = "Retry func error: %s. retry #%d after %s. retry done !!!"
@@ -27,6 +19,13 @@ func Retry(retryCnt int, sleep time.Duration, fn func() error) (err error) {
 			printLog = "Retry func error: %s. retry #%d after %s."
 		}
 		log.Printf(printLog, err.Error(), i, sleep)
+
+		if err = fn(); err == nil {
+			return
+		}
+		if s, ok := err.(stop); ok {
+			return s.error
+		}
 		time.Sleep(sleep)
 	}
 	return
