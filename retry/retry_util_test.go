@@ -25,12 +25,13 @@ func TestRetryEveryTime(t *testing.T) {
 	cnt := 0
 	err := fmt.Errorf("test error every time")
 	a := func() error {
+		log.Printf("TestRetryEveryTime ...\n")
 		cnt++
 		return err
 	}
 	errFn := Retry(3, 1*time.Millisecond, a)
 	assert.Equal(t, err, errFn)
-	assert.Equal(t, 3, cnt)
+	assert.Equal(t, 4, cnt)
 }
 
 // TestRetryOnce...
@@ -38,6 +39,7 @@ func TestRetryOnce(t *testing.T) {
 	cnt := 0
 	err := fmt.Errorf("testing error every time")
 	a := func() error {
+		log.Printf("TestRetryOnce ...\n")
 		if cnt == 0 {
 			cnt++
 			return err

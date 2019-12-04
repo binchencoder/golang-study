@@ -5,26 +5,38 @@ import (
 	"time"
 )
 
-func Retry(attempts int, sleep time.Duration, fn func() error) error {
-	if err := fn(); err != nil {
+// Retry ...
+func Retry(retryCnt int, sleep time.Duration, fn func() error) (err error) {
+	if err = fn(); err == nil {
+		return
+	}
+
+	for i := 1; i <= retryCnt; i++ {
+		if err = fn(); err == nil {
+			return
+		}
+
 		if s, ok := err.(stop); ok {
 			return s.error
 		}
 
-		if attempts--; attempts > 0 {
-			log.Printf("retry func error: %s. attemps #%d after %s.", err.Error(), attempts, sleep)
-			time.Sleep(sleep)
-			return Retry(attempts, 2*sleep, fn)
+		var printLog string
+		if i == retryCnt {
+			printLog = "Retry func error: %s. retry #%d after %s. retry done !!!"
+		} else {
+			printLog = "Retry func error: %s. retry #%d after %s."
 		}
-		return err
+		log.Printf(printLog, err.Error(), i, sleep)
+		time.Sleep(sleep)
 	}
-	return nil
+	return
 }
 
 type stop struct {
 	error
 }
 
+// NoRetryError ...
 func NoRetryError(err error) stop {
 	return stop{err}
 }
