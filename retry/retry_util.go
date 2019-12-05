@@ -5,7 +5,8 @@ import (
 	"time"
 )
 
-// Retry ...
+// Retry function. fn is the retry function.
+// Refer to https://github.com/mnhkahn/gogogo/blob/master/util/retry_util.go
 func Retry(retryCnt int, sleep time.Duration, fn func() error) (err error) {
 	if err = fn(); err == nil {
 		return
@@ -18,7 +19,7 @@ func Retry(retryCnt int, sleep time.Duration, fn func() error) (err error) {
 		} else {
 			printLog = "Retry func error: %s. retry #%d after %s."
 		}
-		log.Printf(printLog, err.Error(), i, sleep)
+		log.Printf(printLog, err.Error(), i, time.Duration(i)*sleep)
 
 		if err = fn(); err == nil {
 			return
@@ -26,7 +27,7 @@ func Retry(retryCnt int, sleep time.Duration, fn func() error) (err error) {
 		if s, ok := err.(stop); ok {
 			return s.error
 		}
-		time.Sleep(sleep)
+		time.Sleep(time.Duration(i) * sleep)
 	}
 	return
 }
