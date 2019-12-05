@@ -64,5 +64,5 @@ func TestRetryStop(t *testing.T) {
 	}
 	errFn := Retry(3, 1*time.Millisecond, a)
 	assert.Equal(t, errFn, err)
-	assert.Equal(t, 1, cnt)
+	assert.Equal(t, 2, cnt)
 }
