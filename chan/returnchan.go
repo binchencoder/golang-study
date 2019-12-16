@@ -24,7 +24,7 @@ func (rwm *RWLock) WithRLock(f func() error) error {
 	return f()
 }
 
-// WithRLock runs the given function with the write lock grabbed.
+// WithWLock runs the given function with the write lock grabbed.
 func (rwm *RWLock) WithWLock(f func() error) error {
 	(&rwm.lock).Lock()
 	defer (&rwm.lock).Unlock()
@@ -67,7 +67,7 @@ func main() {
 	for {
 		select {
 		case <-timer.C:
-			fmt.Println("Auto disconnect with client")
+			fmt.Printf("Auto disconnect with client, timer.C: %+v \n", timer.C)
 			return
 		case updates, ok := <-notiCh:
 			if !ok {
