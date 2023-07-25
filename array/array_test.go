@@ -11,6 +11,13 @@ func TestContains(t *testing.T) {
 	fmt.Printf("Test strings.Contains %d\n", contains)
 }
 
+func TestRange(t *testing.T) {
+	sa := []string{"q", "w", "e", "r", "t"}
+	for _, s := range sa {
+		fmt.Print(s)
+	}
+}
+
 func BenchmarkContains(b *testing.B) {
 	sa := []string{"q", "w", "e", "r", "t"}
 	b.ResetTimer()
